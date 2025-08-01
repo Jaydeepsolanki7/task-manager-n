@@ -1,0 +1,27 @@
+<% if flash[:alert] %>
+  <div class="alert alert-danger" role="alert">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if flash[:notice] %>
+  <div class="alert alert-success" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="card mx-auto mt-5 shadow-sm" style="max-width: 400px;">
+  <div class="card-body">
+    <h3 class="card-title mb-4 text-center">Edit Session</h3>
+
+    <%= form_with url: session_path, method: :patch, html: { class: "needs-validation" } do |form| %>
+      <div class="mb-3">
+        <%= form.password_field :current_password, required: true, autocomplete: "current-password", placeholder: "Enter current password to confirm", maxlength: 72, class: "form-control" %>
+      </div>
+
+      <div class="d-grid">
+        <%= form.submit "Update session", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

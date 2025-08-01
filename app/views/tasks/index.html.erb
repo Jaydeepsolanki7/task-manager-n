@@ -1,0 +1,38 @@
+<% content_for :name, "Tasks" %>
+
+<% if notice %>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <%= notice %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+
+<div class="mb-3 d-flex mt-4 bg-dark justify-content-between align-items-center">
+  <h2 class="p-3 mb-0  text-white rounded">Tasks</h2>
+  <%= link_to "New Task", new_task_path, class: "btn btn-primary me-4" %>
+</div>
+
+
+<div id="tasks" class="row g-3">
+  <% @tasks.each do |task| %>
+    <div class="col-md-4">
+      <div class="card h-100 d-flex flex-column shadow-sm">
+        <div class="card-body flex-grow-1">
+          <h5 class="card-name d-flex justify-content-between">
+            <%= task.name %>
+            <span class="badge <%= status_badge_class(task.status) %>">
+              <%= task.status.humanize %>
+            </span>
+          </h5>
+          <p class="card-text"><%= truncate(task.description, length: 100) %></p>
+        </div>
+        <div class="card-footer bg-white border-0">
+          <%= link_to "View Details", task_path(task), 
+                class: "btn btn-outline-primary btn-sm" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
